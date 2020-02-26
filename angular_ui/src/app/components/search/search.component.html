@@ -1,15 +1,18 @@
 <div class="container mt-3">
-  <form class="example-form">
+  <form class="example-form" [formGroup]="rForm">
     <mat-form-field class="example-full-width">
       <input
         type="text"
         placeholder="Search Title"
-        aria-label="Number"
         matInput
         [formControl]="myControl"
+        formControlName="fTitle"
         [matAutocomplete]="auto"
       />
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="valueMapper">
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="valueMapper($event.option.value)"
+      >
         <mat-option
           *ngFor="let option of filteredOptions | async"
           [value]="option"
@@ -17,6 +20,20 @@
           {{ option }}
         </mat-option>
       </mat-autocomplete>
+    </mat-form-field>
+  </form>
+  <form #f="ngForm">
+    <mat-form-field>
+      <mat-select
+        placeholder="Favorite Platform"
+        [(ngModel)]="selectedValue"
+        name="pf"
+        (ngModelChange)="onPlatformSelection()"
+      >
+        <mat-option *ngFor="let platform of uniqPlatforms" [value]="platform">
+          {{ platform }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
   </form>
   <button
@@ -28,13 +45,15 @@
   >
     Clear Search
   </button>
-  <span class="lead ml-4">Sort By:</span>
-  <button mat-raised-button color="primary" (click)="ascending()" class="m-3">
-    Ascending
-  </button>
-  <button mat-raised-button color="accent" (click)="descending()" class="m-3">
-    Descending
-  </button>
+  <span class="next-line">
+    <span class="lead ">Sort By:</span>
+    <button mat-raised-button color="primary" (click)="ascending()" class="m-3">
+      Ascending
+    </button>
+    <button mat-raised-button color="accent" (click)="descending()" class="m-3">
+      Descending
+    </button>
+  </span>
   <div class="grid-2">
     <div *ngFor="let game of games">
       <div *ngIf="game.title">
@@ -60,10 +79,6 @@
                   >
                   <mat-list-item>{{ game.platform }}</mat-list-item>
                 </mat-list>
-                <!-- <ul>
-                  <li class="d-flex justify-content-start">{{ game.title }}</li>
-                  <li>{{ game.platform }}</li>
-                </ul> -->
               </mat-grid-tile>
             </mat-grid-list>
             <mat-divider></mat-divider>

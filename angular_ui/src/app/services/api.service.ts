@@ -9,11 +9,14 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   getApiData(): Observable<any> {
-    const headers = new HttpHeaders()
-      .append("Content-Type", "application/json")
-      .append("Access-Control-Allow-Headers", "Content-Type")
-      .append("Access-Control-Allow-Methods", "GET")
-      .append("Access-Control-Allow-Origin", "*");
+    const headers = new HttpHeaders();
+    // .append("Content-Type", "application/json")
+    // .append("Access-Control-Allow-Headers", "Content-Type")
+    // .append("Access-Control-Allow-Methods", "GET")
+    // .append("Access-Control-Allow-Origin", "*")
+    // .append("Sec-Fetch-Mode", "cors")
+    // .append("Sec-Fetch-Site", "cross-site");
+
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = "http://starlord.hackerearth.com/gamesarena";
     return this.http.get(proxyurl + url);

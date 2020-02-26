@@ -58,7 +58,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container mt-3\">\n  <form class=\"example-form\">\n    <mat-form-field class=\"example-full-width\">\n      <input\n        type=\"text\"\n        placeholder=\"Search Title\"\n        aria-label=\"Number\"\n        matInput\n        [formControl]=\"myControl\"\n        [matAutocomplete]=\"auto\"\n      />\n      <mat-autocomplete #auto=\"matAutocomplete\" [displayWith]=\"valueMapper\">\n        <mat-option\n          *ngFor=\"let option of filteredOptions | async\"\n          [value]=\"option\"\n        >\n          {{ option }}\n        </mat-option>\n      </mat-autocomplete>\n    </mat-form-field>\n  </form>\n  <button\n    mat-raised-button\n    color=\"warn\"\n    [disabled]=\"!this.selected\"\n    (click)=\"clear()\"\n    class=\"mt-3 mr-3\"\n  >\n    Clear Search\n  </button>\n  <span class=\"lead ml-4\">Sort By:</span>\n  <button mat-raised-button color=\"primary\" (click)=\"ascending()\" class=\"m-3\">\n    Ascending\n  </button>\n  <button mat-raised-button color=\"accent\" (click)=\"descending()\" class=\"m-3\">\n    Descending\n  </button>\n  <div class=\"grid-2\">\n    <div *ngFor=\"let game of games\">\n      <div *ngIf=\"game.title\">\n        <mat-card>\n          <mat-card-content>\n            <div *ngIf=\"game.editors_choice == 'Y'\" class=\"flr display-4\">\n              ⭐\n            </div>\n            <mat-grid-list cols=\"4\" rowHeight=\"60px\">\n              <mat-grid-tile colspan=\"1\" rowspan=\"3\">\n                <img\n                  src=\"../../../assets/xbox.jpg\"\n                  alt=\"{{ game.title }}\"\n                  class=\"img-fluid img\"\n                />\n              </mat-grid-tile>\n              <mat-grid-tile colspan=\"2\" rowspan=\"3\" class=\"text-align-left\">\n                <mat-list>\n                  <mat-list-item\n                    ><p class=\"h6 float-left\">\n                      {{ game.title }}\n                    </p></mat-list-item\n                  >\n                  <mat-list-item>{{ game.platform }}</mat-list-item>\n                </mat-list>\n                <!-- <ul>\n                  <li class=\"d-flex justify-content-start\">{{ game.title }}</li>\n                  <li>{{ game.platform }}</li>\n                </ul> -->\n              </mat-grid-tile>\n            </mat-grid-list>\n            <mat-divider></mat-divider>\n            <div class=\"mt-2\">\n              Genre: <strong> {{ game.genre }}</strong>\n              <span\n                class=\"float-right font-weight-bold\"\n                style=\"color: brown; font-size: 1rem;\"\n                >{{ game.score }}\n              </span>\n            </div>\n          </mat-card-content>\n        </mat-card>\n      </div>\n    </div>\n  </div>\n  <div *ngIf=\"loading\" id=\"spinnerBack\">\n    <mat-progress-spinner\n      [diameter]=\"70\"\n      mode=\"indeterminate\"\n      style=\"display: block;position: absolute; top: 50%; right: 50%;\"\n    ></mat-progress-spinner>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container mt-3\">\n  <form class=\"example-form\" [formGroup]=\"rForm\">\n    <mat-form-field class=\"example-full-width\">\n      <input\n        type=\"text\"\n        placeholder=\"Search Title\"\n        matInput\n        [formControl]=\"myControl\"\n        formControlName=\"fTitle\"\n        [matAutocomplete]=\"auto\"\n      />\n      <mat-autocomplete\n        #auto=\"matAutocomplete\"\n        (optionSelected)=\"valueMapper($event.option.value)\"\n      >\n        <mat-option\n          *ngFor=\"let option of filteredOptions | async\"\n          [value]=\"option\"\n        >\n          {{ option }}\n        </mat-option>\n      </mat-autocomplete>\n    </mat-form-field>\n  </form>\n  <form #f=\"ngForm\">\n    <mat-form-field>\n      <mat-select\n        placeholder=\"Favorite Platform\"\n        [(ngModel)]=\"selectedValue\"\n        name=\"pf\"\n        (ngModelChange)=\"onPlatformSelection()\"\n      >\n        <mat-option *ngFor=\"let platform of uniqPlatforms\" [value]=\"platform\">\n          {{ platform }}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </form>\n  <button\n    mat-raised-button\n    color=\"warn\"\n    [disabled]=\"!this.selected\"\n    (click)=\"clear()\"\n    class=\"mt-3 mr-3\"\n  >\n    Clear Search\n  </button>\n  <span class=\"next-line\">\n    <span class=\"lead \">Sort By:</span>\n    <button mat-raised-button color=\"primary\" (click)=\"ascending()\" class=\"m-3\">\n      Ascending\n    </button>\n    <button mat-raised-button color=\"accent\" (click)=\"descending()\" class=\"m-3\">\n      Descending\n    </button>\n  </span>\n  <div class=\"grid-2\">\n    <div *ngFor=\"let game of games\">\n      <div *ngIf=\"game.title\">\n        <mat-card>\n          <mat-card-content>\n            <div *ngIf=\"game.editors_choice == 'Y'\" class=\"flr display-4\">\n              ⭐\n            </div>\n            <mat-grid-list cols=\"4\" rowHeight=\"60px\">\n              <mat-grid-tile colspan=\"1\" rowspan=\"3\">\n                <img\n                  src=\"../../../assets/xbox.jpg\"\n                  alt=\"{{ game.title }}\"\n                  class=\"img-fluid img\"\n                />\n              </mat-grid-tile>\n              <mat-grid-tile colspan=\"2\" rowspan=\"3\" class=\"text-align-left\">\n                <mat-list>\n                  <mat-list-item\n                    ><p class=\"h6 float-left\">\n                      {{ game.title }}\n                    </p></mat-list-item\n                  >\n                  <mat-list-item>{{ game.platform }}</mat-list-item>\n                </mat-list>\n              </mat-grid-tile>\n            </mat-grid-list>\n            <mat-divider></mat-divider>\n            <div class=\"mt-2\">\n              Genre: <strong> {{ game.genre }}</strong>\n              <span\n                class=\"float-right font-weight-bold\"\n                style=\"color: brown; font-size: 1rem;\"\n                >{{ game.score }}\n              </span>\n            </div>\n          </mat-card-content>\n        </mat-card>\n      </div>\n    </div>\n  </div>\n  <div *ngIf=\"loading\" id=\"spinnerBack\">\n    <mat-progress-spinner\n      [diameter]=\"70\"\n      mode=\"indeterminate\"\n      style=\"display: block;position: absolute; top: 50%; right: 50%;\"\n    ></mat-progress-spinner>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -416,7 +416,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_chips__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/material/chips */ "./node_modules/@angular/material/esm2015/chips.js");
 /* harmony import */ var _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @angular/material/progress-spinner */ "./node_modules/@angular/material/esm2015/progress-spinner.js");
 /* harmony import */ var _angular_material_autocomplete__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/material/autocomplete */ "./node_modules/@angular/material/esm2015/autocomplete.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/material/select */ "./node_modules/@angular/material/esm2015/select.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+
 
 
 
@@ -463,8 +465,9 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_material_divider__WEBPACK_IMPORTED_MODULE_13__["MatDividerModule"],
             _angular_material_form_field__WEBPACK_IMPORTED_MODULE_12__["MatFormFieldModule"],
             _angular_material_autocomplete__WEBPACK_IMPORTED_MODULE_21__["MatAutocompleteModule"],
-            _angular_forms__WEBPACK_IMPORTED_MODULE_22__["FormsModule"],
-            _angular_forms__WEBPACK_IMPORTED_MODULE_22__["ReactiveFormsModule"]
+            _angular_material_select__WEBPACK_IMPORTED_MODULE_22__["MatSelectModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_23__["FormsModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_23__["ReactiveFormsModule"]
         ],
         providers: [],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
@@ -528,7 +531,7 @@ NavbarComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".grid-2 {\r\n  display: grid;\r\n  /* grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); */\r\n  /* grid-template-columns: repeat(2, 1fr); */\r\n  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));\r\n  grid-gap: 1.5rem;\r\n}\r\n\r\n.star {\r\n  position: relative;\r\n}\r\n\r\n.flr {\r\n  position: absolute;\r\n  top: 0%;\r\n  right: 5%;\r\n}\r\n\r\n.example-form {\r\n  min-width: 150px;\r\n  max-width: 500px;\r\n  width: 100%;\r\n}\r\n\r\n.example-full-width {\r\n  width: 100%;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9zZWFyY2gvc2VhcmNoLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFhO0VBQ2IsaUVBQWlFO0VBQ2pFLDJDQUEyQztFQUMzQywyREFBMkQ7RUFDM0QsZ0JBQWdCO0FBQ2xCOztBQUVBO0VBQ0Usa0JBQWtCO0FBQ3BCOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLE9BQU87RUFDUCxTQUFTO0FBQ1g7O0FBQ0E7RUFDRSxnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLFdBQVc7QUFDYjs7QUFFQTtFQUNFLFdBQVc7QUFDYiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvc2VhcmNoL3NlYXJjaC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmdyaWQtMiB7XHJcbiAgZGlzcGxheTogZ3JpZDtcclxuICAvKiBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IHJlcGVhdChhdXRvLWZpdCwgbWlubWF4KDI0MHB4LCAxZnIpKTsgKi9cclxuICAvKiBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IHJlcGVhdCgyLCAxZnIpOyAqL1xyXG4gIGdyaWQtdGVtcGxhdGUtY29sdW1uczogcmVwZWF0KGF1dG8tZml0LCBtaW5tYXgoMzYwcHgsIDFmcikpO1xyXG4gIGdyaWQtZ2FwOiAxLjVyZW07XHJcbn1cclxuXHJcbi5zdGFyIHtcclxuICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbn1cclxuXHJcbi5mbHIge1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICB0b3A6IDAlO1xyXG4gIHJpZ2h0OiA1JTtcclxufVxyXG4uZXhhbXBsZS1mb3JtIHtcclxuICBtaW4td2lkdGg6IDE1MHB4O1xyXG4gIG1heC13aWR0aDogNTAwcHg7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbn1cclxuXHJcbi5leGFtcGxlLWZ1bGwtd2lkdGgge1xyXG4gIHdpZHRoOiAxMDAlO1xyXG59XHJcbiJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".grid-2 {\r\n  display: grid;\r\n  /* grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); */\r\n  /* grid-template-columns: repeat(2, 1fr); */\r\n  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));\r\n  grid-gap: 1.5rem;\r\n}\r\n\r\n.star {\r\n  position: relative;\r\n}\r\n\r\n.flr {\r\n  position: absolute;\r\n  top: 0%;\r\n  right: 5%;\r\n}\r\n\r\n.example-form {\r\n  min-width: 150px;\r\n  max-width: 500px;\r\n  width: 70%;\r\n}\r\n\r\n.example-full-width {\r\n  width: 70%;\r\n}\r\n\r\n@media (max-width: 400px) {\r\n  .nnl {\r\n    display: inline-block;\r\n  }\r\n  .nnlb {\r\n    margin-left: 0px;\r\n  }\r\n}\r\n\r\n@media (max-width: 575.98px) {\r\n  .next-line {\r\n    display: inline-block;\r\n  }\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9zZWFyY2gvc2VhcmNoLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFhO0VBQ2IsaUVBQWlFO0VBQ2pFLDJDQUEyQztFQUMzQywyREFBMkQ7RUFDM0QsZ0JBQWdCO0FBQ2xCOztBQUVBO0VBQ0Usa0JBQWtCO0FBQ3BCOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLE9BQU87RUFDUCxTQUFTO0FBQ1g7O0FBQ0E7RUFDRSxnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLFVBQVU7QUFDWjs7QUFFQTtFQUNFLFVBQVU7QUFDWjs7QUFFQTtFQUNFO0lBQ0UscUJBQXFCO0VBQ3ZCO0VBQ0E7SUFDRSxnQkFBZ0I7RUFDbEI7QUFDRjs7QUFDQTtFQUNFO0lBQ0UscUJBQXFCO0VBQ3ZCO0FBQ0YiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3NlYXJjaC9zZWFyY2guY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5ncmlkLTIge1xyXG4gIGRpc3BsYXk6IGdyaWQ7XHJcbiAgLyogZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiByZXBlYXQoYXV0by1maXQsIG1pbm1heCgyNDBweCwgMWZyKSk7ICovXHJcbiAgLyogZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiByZXBlYXQoMiwgMWZyKTsgKi9cclxuICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IHJlcGVhdChhdXRvLWZpdCwgbWlubWF4KDM2MHB4LCAxZnIpKTtcclxuICBncmlkLWdhcDogMS41cmVtO1xyXG59XHJcblxyXG4uc3RhciB7XHJcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG59XHJcblxyXG4uZmxyIHtcclxuICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgdG9wOiAwJTtcclxuICByaWdodDogNSU7XHJcbn1cclxuLmV4YW1wbGUtZm9ybSB7XHJcbiAgbWluLXdpZHRoOiAxNTBweDtcclxuICBtYXgtd2lkdGg6IDUwMHB4O1xyXG4gIHdpZHRoOiA3MCU7XHJcbn1cclxuXHJcbi5leGFtcGxlLWZ1bGwtd2lkdGgge1xyXG4gIHdpZHRoOiA3MCU7XHJcbn1cclxuXHJcbkBtZWRpYSAobWF4LXdpZHRoOiA0MDBweCkge1xyXG4gIC5ubmwge1xyXG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gIH1cclxuICAubm5sYiB7XHJcbiAgICBtYXJnaW4tbGVmdDogMHB4O1xyXG4gIH1cclxufVxyXG5AbWVkaWEgKG1heC13aWR0aDogNTc1Ljk4cHgpIHtcclxuICAubmV4dC1saW5lIHtcclxuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICB9XHJcbn1cclxuIl19 */");
 
 /***/ }),
 
@@ -553,18 +556,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SearchComponent = class SearchComponent {
-    constructor(apiService) {
+    constructor(apiService, fb) {
         this.apiService = apiService;
+        this.fb = fb;
         this.games = [];
         this.games1 = [];
         this.loading = false;
         this.options = [];
         this.selected = false;
+        this.uniqPlatforms = [];
         this.myControl = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]();
         this.valueMapper = key => {
             // let selection = this.games.find(({ title }) => title === key);
             console.log(key);
             let selection = [];
+            this.games = this.games1;
             this.games.forEach(game => {
                 if (game.title === key) {
                     console.log(game);
@@ -575,16 +581,13 @@ let SearchComponent = class SearchComponent {
             if (selection.length != 0) {
                 console.log("original games", this.games);
                 this.games = selection;
-                // this.games.push(selection);
                 console.log("new games", this.games);
                 this.selected = true;
-                console.log(this.selected);
-                console.log(this.options);
-                // console.log("games1", this.games1);
-                // return selection.value;
-                this.check();
             }
         };
+        this.rForm = fb.group({
+            fTitle: ""
+        });
     }
     ngOnInit() {
         this.onLoad();
@@ -601,19 +604,21 @@ let SearchComponent = class SearchComponent {
             this.games.shift();
             this.games1.shift();
             this.loading = false;
+            const platform = [];
             this.games.map(game => this.options.push(game.title));
+            this.games.map(game => platform.push(game.platform));
+            this.uniqPlatforms = platform.filter(function (elem, index, self) {
+                return index === self.indexOf(elem);
+            });
             this.filteredOptions = this.myControl.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["startWith"])(""), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(value => this._filter(value)));
-            // console.log(this.filteredOptions.subscribe(value => console.log(value)));
-            console.log(this.options);
         });
     }
     clear() {
-        // this.games = this.games1;
-        this.ngOnInit();
+        this.games = this.games1;
+        this.tform.reset();
+        this.rForm.reset();
         console.log(this.games);
         this.selected = false;
-        this.options = [];
-        this.myControl.enable();
     }
     ascending() {
         this.games.sort((a, b) => (a.score > b.score ? 1 : -1));
@@ -621,15 +626,32 @@ let SearchComponent = class SearchComponent {
     descending() {
         this.games.sort((a, b) => (a.score < b.score ? 1 : -1));
     }
-    check() {
-        if (this.selected == true) {
-            this.myControl.disable();
+    onPlatformSelection() {
+        console.log(this.selectedValue);
+        let selection = [];
+        this.games = this.games1;
+        this.games.forEach(game => {
+            if (game.platform === this.selectedValue) {
+                console.log(game);
+                selection.push(game);
+            }
+        });
+        console.log(selection);
+        if (selection.length != 0) {
+            console.log("original games", this.games);
+            this.games = selection;
+            console.log("new games", this.games);
+            this.selected = true;
         }
     }
 };
 SearchComponent.ctorParameters = () => [
-    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] }
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] }
 ];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])("f", { static: false })
+], SearchComponent.prototype, "tform", void 0);
 SearchComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: "app-search",
@@ -663,11 +685,13 @@ let ApiService = class ApiService {
         this.http = http;
     }
     getApiData() {
-        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]()
-            .append("Content-Type", "application/json")
-            .append("Access-Control-Allow-Headers", "Content-Type")
-            .append("Access-Control-Allow-Methods", "GET")
-            .append("Access-Control-Allow-Origin", "*");
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]();
+        // .append("Content-Type", "application/json")
+        // .append("Access-Control-Allow-Headers", "Content-Type")
+        // .append("Access-Control-Allow-Methods", "GET")
+        // .append("Access-Control-Allow-Origin", "*")
+        // .append("Sec-Fetch-Mode", "cors")
+        // .append("Sec-Fetch-Site", "cross-site");
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
         const url = "http://starlord.hackerearth.com/gamesarena";
         return this.http.get(proxyurl + url);

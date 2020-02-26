@@ -20,6 +20,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatSelectModule } from "@angular/material/select";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
@@ -42,6 +43,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     MatDividerModule,
     MatFormFieldModule,
     MatAutocompleteModule,
+    MatSelectModule,
     FormsModule,
     ReactiveFormsModule
   ],
