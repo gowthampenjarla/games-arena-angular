@@ -670,7 +670,7 @@ let ApiService = class ApiService {
             .append("Access-Control-Allow-Origin", "*");
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
         const url = "http://starlord.hackerearth.com/gamesarena";
-        return this.http.get(url);
+        return this.http.get(proxyurl + url);
     }
 };
 ApiService.ctorParameters = () => [
@@ -754,7 +754,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_3__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\penja\Documents\Coding_WorkSpace\Assesments\gainsight-assesment\angular_ui\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\penja\Documents\Coding_WorkSpace\Assesments\gainsight-assesment\games-arena-angular\angular_ui\src\main.ts */"./src/main.ts");
 
 
 /***/ })

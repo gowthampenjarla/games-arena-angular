@@ -16,6 +16,6 @@ export class ApiService {
       .append("Access-Control-Allow-Origin", "*");
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = "http://starlord.hackerearth.com/gamesarena";
-    return this.http.get(url);
+    return this.http.get(proxyurl + url);
   }
 }

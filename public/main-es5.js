@@ -1321,7 +1321,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]().append("Content-Type", "application/json").append("Access-Control-Allow-Headers", "Content-Type").append("Access-Control-Allow-Methods", "GET").append("Access-Control-Allow-Origin", "*");
           var proxyurl = "https://cors-anywhere.herokuapp.com/";
           var url = "http://starlord.hackerearth.com/gamesarena";
-          return this.http.get(url);
+          return this.http.get(proxyurl + url);
         }
       }]);
 
@@ -1461,7 +1461,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! C:\Users\penja\Documents\Coding_WorkSpace\Assesments\gainsight-assesment\angular_ui\src\main.ts */
+    /*! C:\Users\penja\Documents\Coding_WorkSpace\Assesments\gainsight-assesment\games-arena-angular\angular_ui\src\main.ts */
     "./src/main.ts");
     /***/
   }
