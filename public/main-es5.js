@@ -91,7 +91,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"container mt-3\">\n  <form class=\"example-form\" [formGroup]=\"rForm\">\n    <mat-form-field class=\"example-full-width\">\n      <input\n        type=\"text\"\n        placeholder=\"Search Title\"\n        matInput\n        [formControl]=\"myControl\"\n        formControlName=\"fTitle\"\n        [matAutocomplete]=\"auto\"\n      />\n      <mat-autocomplete\n        #auto=\"matAutocomplete\"\n        (optionSelected)=\"valueMapper($event.option.value)\"\n      >\n        <mat-option\n          *ngFor=\"let option of filteredOptions | async\"\n          [value]=\"option\"\n        >\n          {{ option }}\n        </mat-option>\n      </mat-autocomplete>\n    </mat-form-field>\n  </form>\n  <form #f=\"ngForm\">\n    <mat-form-field>\n      <mat-select\n        placeholder=\"Favorite Platform\"\n        [(ngModel)]=\"selectedValue\"\n        name=\"pf\"\n        (ngModelChange)=\"onPlatformSelection()\"\n      >\n        <mat-option *ngFor=\"let platform of uniqPlatforms\" [value]=\"platform\">\n          {{ platform }}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </form>\n  <button\n    mat-raised-button\n    color=\"warn\"\n    [disabled]=\"!this.selected\"\n    (click)=\"clear()\"\n    class=\"mt-3 mr-3\"\n  >\n    Clear Search\n  </button>\n  <span class=\"next-line\">\n    <span class=\"lead \">Sort By:</span>\n    <button mat-raised-button color=\"primary\" (click)=\"ascending()\" class=\"m-3\">\n      Ascending\n    </button>\n    <button mat-raised-button color=\"accent\" (click)=\"descending()\" class=\"m-3\">\n      Descending\n    </button>\n  </span>\n  <div class=\"grid-2\">\n    <div *ngFor=\"let game of games\">\n      <div *ngIf=\"game.title\">\n        <mat-card>\n          <mat-card-content>\n            <div *ngIf=\"game.editors_choice == 'Y'\" class=\"flr display-4\">\n              ⭐\n            </div>\n            <mat-grid-list cols=\"4\" rowHeight=\"60px\">\n              <mat-grid-tile colspan=\"1\" rowspan=\"3\">\n                <img\n                  src=\"../../../assets/xbox.jpg\"\n                  alt=\"{{ game.title }}\"\n                  class=\"img-fluid img\"\n                />\n              </mat-grid-tile>\n              <mat-grid-tile colspan=\"2\" rowspan=\"3\" class=\"text-align-left\">\n                <mat-list>\n                  <mat-list-item\n                    ><p class=\"h6 float-left\">\n                      {{ game.title }}\n                    </p></mat-list-item\n                  >\n                  <mat-list-item>{{ game.platform }}</mat-list-item>\n                </mat-list>\n              </mat-grid-tile>\n            </mat-grid-list>\n            <mat-divider></mat-divider>\n            <div class=\"mt-2\">\n              Genre: <strong> {{ game.genre }}</strong>\n              <span\n                class=\"float-right font-weight-bold\"\n                style=\"color: brown; font-size: 1rem;\"\n                >{{ game.score }}\n              </span>\n            </div>\n          </mat-card-content>\n        </mat-card>\n      </div>\n    </div>\n  </div>\n  <div *ngIf=\"loading\" id=\"spinnerBack\">\n    <mat-progress-spinner\n      [diameter]=\"70\"\n      mode=\"indeterminate\"\n      style=\"display: block;position: absolute; top: 50%; right: 50%;\"\n    ></mat-progress-spinner>\n  </div>\n</div>\n";
+    __webpack_exports__["default"] = "<div class=\"container mt-3\">\n  <form class=\"example-form\" [formGroup]=\"rForm\">\n    <mat-form-field class=\"example-full-width\">\n      <input\n        type=\"text\"\n        placeholder=\"Search Title\"\n        matInput\n        [formControl]=\"myControl\"\n        formControlName=\"fTitle\"\n        [matAutocomplete]=\"auto\"\n      />\n      <mat-autocomplete\n        #auto=\"matAutocomplete\"\n        (optionSelected)=\"valueMapper($event.option.value)\"\n      >\n        <mat-option\n          *ngFor=\"let option of filteredOptions | async\"\n          [value]=\"option\"\n        >\n          {{ option }}\n        </mat-option>\n      </mat-autocomplete>\n    </mat-form-field>\n  </form>\n  <form #f=\"ngForm\">\n    <mat-form-field>\n      <mat-select\n        placeholder=\"Search Platform\"\n        [(ngModel)]=\"selectedValue\"\n        name=\"pf\"\n        (ngModelChange)=\"onPlatformSelection()\"\n      >\n        <mat-option *ngFor=\"let platform of uniqPlatforms\" [value]=\"platform\">\n          {{ platform }}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n  </form>\n  <button\n    mat-raised-button\n    color=\"warn\"\n    [disabled]=\"!this.selected\"\n    (click)=\"clear()\"\n    class=\"mt-3 mr-3\"\n  >\n    Clear Search\n  </button>\n  <span class=\"next-line\">\n    <span class=\"lead \">Sort By:</span>\n    <button mat-raised-button color=\"primary\" (click)=\"ascending()\" class=\"m-3\">\n      Ascending\n    </button>\n    <button mat-raised-button color=\"accent\" (click)=\"descending()\" class=\"m-3\">\n      Descending\n    </button>\n  </span>\n  <div class=\"grid-2\">\n    <div *ngFor=\"let game of games\">\n      <div *ngIf=\"game.title\">\n        <mat-card>\n          <mat-card-content>\n            <div *ngIf=\"game.editors_choice == 'Y'\" class=\"flr display-4\">\n              ⭐\n            </div>\n            <mat-grid-list cols=\"4\" rowHeight=\"60px\">\n              <mat-grid-tile colspan=\"1\" rowspan=\"3\">\n                <img\n                  src=\"../../../assets/xbox.jpg\"\n                  alt=\"{{ game.title }}\"\n                  class=\"img-fluid img\"\n                />\n              </mat-grid-tile>\n              <mat-grid-tile colspan=\"2\" rowspan=\"3\" class=\"text-align-left\">\n                <mat-list>\n                  <mat-list-item\n                    ><p class=\"h6 float-left\">\n                      {{ game.title }}\n                    </p></mat-list-item\n                  >\n                  <mat-list-item>{{ game.platform }}</mat-list-item>\n                </mat-list>\n              </mat-grid-tile>\n            </mat-grid-list>\n            <mat-divider></mat-divider>\n            <div class=\"mt-2\">\n              Genre: <strong> {{ game.genre }}</strong>\n              <span\n                class=\"float-right font-weight-bold\"\n                style=\"color: brown; font-size: 1rem;\"\n                >{{ game.score }}\n              </span>\n            </div>\n          </mat-card-content>\n        </mat-card>\n      </div>\n    </div>\n  </div>\n  <div *ngIf=\"loading\" id=\"spinnerBack\">\n    <mat-progress-spinner\n      [diameter]=\"70\"\n      mode=\"indeterminate\"\n      style=\"display: block;position: absolute; top: 50%; right: 50%;\"\n    ></mat-progress-spinner>\n  </div>\n</div>\n";
     /***/
   },
 
@@ -1151,10 +1151,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.options = [];
         this.selected = false;
         this.uniqPlatforms = [];
-        this.myControl = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]();
+        this.myControl = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](); // Auto Complete search functionlaity
 
         this.valueMapper = function (key) {
-          // let selection = this.games.find(({ title }) => title === key);
           console.log(key);
           var selection = [];
           _this.games = _this.games1;
@@ -1210,14 +1209,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             _this2.loading = false;
             var platform = [];
+            var options = [];
 
             _this2.games.map(function (game) {
-              return _this2.options.push(game.title);
+              return options.push(game.title);
+            }); // Removing duplicate elements in options
+
+
+            _this2.options = options.filter(function (elem, index, self) {
+              return index === self.indexOf(elem);
             });
 
             _this2.games.map(function (game) {
               return platform.push(game.platform);
-            });
+            }); // Removing duplicate elements in platforms
+
 
             _this2.uniqPlatforms = platform.filter(function (elem, index, self) {
               return index === self.indexOf(elem);
@@ -1226,30 +1232,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               return _this2._filter(value);
             }));
           });
-        }
-      }, {
-        key: "clear",
-        value: function clear() {
-          this.games = this.games1;
-          this.tform.reset();
-          this.rForm.reset();
-          console.log(this.games);
-          this.selected = false;
-        }
-      }, {
-        key: "ascending",
-        value: function ascending() {
-          this.games.sort(function (a, b) {
-            return a.score > b.score ? 1 : -1;
-          });
-        }
-      }, {
-        key: "descending",
-        value: function descending() {
-          this.games.sort(function (a, b) {
-            return a.score < b.score ? 1 : -1;
-          });
-        }
+        } // Favourite platform select functionality
+
       }, {
         key: "onPlatformSelection",
         value: function onPlatformSelection() {
@@ -1272,6 +1256,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             console.log("new games", this.games);
             this.selected = true;
           }
+        } // Clear Form fields and data
+
+      }, {
+        key: "clear",
+        value: function clear() {
+          this.games = this.games1;
+          this.tform.reset();
+          this.rForm.reset();
+          console.log(this.games);
+          this.selected = false;
+        } // FIlter by ascending and descending order of score
+
+      }, {
+        key: "ascending",
+        value: function ascending() {
+          this.games.sort(function (a, b) {
+            return a.score > b.score ? 1 : -1;
+          });
+        }
+      }, {
+        key: "descending",
+        value: function descending() {
+          this.games.sort(function (a, b) {
+            return a.score < b.score ? 1 : -1;
+          });
         }
       }]);
 

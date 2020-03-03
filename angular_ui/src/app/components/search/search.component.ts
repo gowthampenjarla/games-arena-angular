@@ -15,7 +15,7 @@ export class SearchComponent implements OnInit {
   games1: Array<any> = [];
   loading: boolean = false;
   options: string[] = [];
-  selected = false;
+  selected: boolean = false;
   selectedValue: string;
   uniqPlatforms: Array<any> = [];
   myControl = new FormControl();
@@ -49,9 +49,16 @@ export class SearchComponent implements OnInit {
       this.games1.shift();
       this.loading = false;
       const platform = [];
-      this.games.map(game => this.options.push(game.title));
+      const options = [];
+      this.games.map(game => options.push(game.title));
+
+      // Removing duplicate elements in options
+      this.options = options.filter(function(elem, index, self) {
+        return index === self.indexOf(elem);
+      });
       this.games.map(game => platform.push(game.platform));
 
+      // Removing duplicate elements in platforms
       this.uniqPlatforms = platform.filter(function(elem, index, self) {
         return index === self.indexOf(elem);
       });
@@ -63,8 +70,8 @@ export class SearchComponent implements OnInit {
     });
   }
 
+  // Auto Complete search functionlaity
   valueMapper = key => {
-    // let selection = this.games.find(({ title }) => title === key);
     console.log(key);
     let selection = [];
     this.games = this.games1;
@@ -84,21 +91,7 @@ export class SearchComponent implements OnInit {
     }
   };
 
-  clear() {
-    this.games = this.games1;
-    this.tform.reset();
-    this.rForm.reset();
-    console.log(this.games);
-    this.selected = false;
-  }
-
-  ascending() {
-    this.games.sort((a, b) => (a.score > b.score ? 1 : -1));
-  }
-  descending() {
-    this.games.sort((a, b) => (a.score < b.score ? 1 : -1));
-  }
-
+  // Favourite platform select functionality
   onPlatformSelection() {
     console.log(this.selectedValue);
     let selection = [];
@@ -117,5 +110,21 @@ export class SearchComponent implements OnInit {
       console.log("new games", this.games);
       this.selected = true;
     }
+  }
+
+  // Clear Form fields and data
+  clear() {
+    this.games = this.games1;
+    this.tform.reset();
+    this.rForm.reset();
+    console.log(this.games);
+    this.selected = false;
+  }
+  // FIlter by ascending and descending order of score
+  ascending() {
+    this.games.sort((a, b) => (a.score > b.score ? 1 : -1));
+  }
+  descending() {
+    this.games.sort((a, b) => (a.score < b.score ? 1 : -1));
   }
 }
